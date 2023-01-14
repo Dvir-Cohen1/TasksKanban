@@ -1,19 +1,28 @@
 import React, { Suspense } from "react";
-import { Routes, Route, Link, Outlet, Navigate } from "react-router-dom";
-import { routes as appRoutes } from "./_routes";
+import {
+  Routes,
+  Route,
+  Link,
+  Outlet,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import { appRoutes, authRoutes } from "./_routes";
 import { useSelector } from "react-redux";
-import Layout from "../layout/Layout";
+import AppLayout from "../layout/AppLayout";
+import AuthLayout from "../layout/AuthLayout";
+import Login from "../pages/authentication/Login";
+import Register from "../pages/authentication/Login";
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuth } = useSelector((state) => state.auth);
-
-  return isAuth ? children : <Navigate to="/login" replace />;
+  // const { isAuth } = useSelector((state) => state.auth);
+  // return isAuth ? children : <Navigate to="/login" replace />;
 };
 
 const RouterWrapper = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<AppLayout />}>
         {appRoutes.map((route, index) => {
           return (
             <Route

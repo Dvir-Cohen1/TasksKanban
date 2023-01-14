@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { routes } from "../routes/_routes";
+import { appRoutes } from "../routes/_routes";
 
 const NavLinks = () => {
   return (
     <>
       <nav>
-        {routes.map((route, index) => (
+        {appRoutes.map((route, index) => (
           <Link key={index} to={route.path}>
             {route.linkLabel}
           </Link>

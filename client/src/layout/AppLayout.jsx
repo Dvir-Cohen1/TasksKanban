@@ -5,16 +5,15 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
-  const { pathname } = useLocation();
-  const isAuthPath =
-    pathname == "/login" || pathname == "/register" ? true : false;
+  // const { pathname } = useLocation();
+  // const isAuthPath = pathname == "/login" || pathname == "/register" ? true : false;
   return (
     <main className="main">
-      <Box>
-        {isAuthPath || <Navbar />}
+      <div>
         {children}
-      </Box>
+      </div>
       <Sidebar />
+      
     </main>
   );
 };

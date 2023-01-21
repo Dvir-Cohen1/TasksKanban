@@ -2,21 +2,23 @@ import React, { Suspense } from "react";
 import {
   Routes,
   Route,
-  Link,
-  Outlet,
-  Navigate,
-  useLocation,
+  // Link,
+  // Outlet,
+  // Navigate,
+  // useLocation,
 } from "react-router-dom";
-import { appRoutes, authRoutes } from "./_routes";
-import { useSelector } from "react-redux";
+import { appRoutes } from "./_routes";
+// import { useSelector } from "react-redux";
 import AppLayout from "../layout/AppLayout";
-import AuthLayout from "../layout/AuthLayout";
-import Login from "../pages/authentication/Login";
-import Register from "../pages/authentication/Login";
+// import AuthLayout from "../layout/AuthLayout";
+// import Login from "../pages/authentication/Login";
+// import Register from "../pages/authentication/Login";
+import Sidebar from "../layout/Sidebar";
 
 const ProtectedRoute = ({ children }) => {
   // const { isAuth } = useSelector((state) => state.auth);
   // return isAuth ? children : <Navigate to="/login" replace />;
+  
 };
 
 const RouterWrapper = () => {
@@ -44,22 +46,5 @@ const RouterWrapper = () => {
     </Routes>
   );
 };
-
-// const NavbarLayout = () => {
-//   return (
-//     <>
-//       <nav>
-//         {appRoutes.map((route, index) => (
-//           <Link key={index} to={route.path}>
-//             {route.linkLabel}
-//           </Link>
-//         ))}
-//       </nav>
-//       <Suspense fallback={<h1>Loading..</h1>}>
-//         <Outlet />
-//       </Suspense>
-//     </>
-//   );
-// };
 
 export default RouterWrapper;

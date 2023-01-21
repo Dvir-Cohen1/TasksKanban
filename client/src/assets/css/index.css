@@ -17,6 +17,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  min-height: 100vh;
 }
 
 a {
@@ -75,7 +76,7 @@ button:focus-visible {
 
 
 body {
-  background-image: url("./assets/background.png");
+  background-image: url("../images/background.png");
   background-position: initial;
   background-repeat: initial;
   background-attachment: initial;
@@ -83,4 +84,14 @@ body {
   background-clip: initial;
   background-size: cover;
   background-color: rgb(3, 12, 29) !important;
+}
+
+
+main.main {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  min-height: 95vh;
 }

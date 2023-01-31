@@ -1,19 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Box from "@mui/material/Box";
-import { useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from "./navbar/Navbar";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
-  // const { pathname } = useLocation();
-  // const isAuthPath = pathname == "/login" || pathname == "/register" ? true : false;
+const Layout = () => {
   return (
     <main className="main">
-      <div>
-        {children}
-      </div>
-      <Sidebar />
-      
+      <Box>
+        <Navbar />
+        <Suspense fallback={<h1>Loading..</h1>}>
+          <Outlet />
+        </Suspense>
+      </Box>
     </main>
   );
 };

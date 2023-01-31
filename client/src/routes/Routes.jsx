@@ -13,12 +13,12 @@ import AppLayout from "../layout/AppLayout";
 // import AuthLayout from "../layout/AuthLayout";
 // import Login from "../pages/authentication/Login";
 // import Register from "../pages/authentication/Login";
-import Sidebar from "../layout/Sidebar";
+
 
 const ProtectedRoute = ({ children }) => {
-  // const { isAuth } = useSelector((state) => state.auth);
-  // return isAuth ? children : <Navigate to="/login" replace />;
-  
+  const { isAuth } = useSelector((state) => state.auth);
+
+  return isAuth ? children : <Navigate to="/login" replace />;
 };
 
 const RouterWrapper = () => {

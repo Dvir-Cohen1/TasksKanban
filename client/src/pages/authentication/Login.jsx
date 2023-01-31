@@ -1,22 +1,10 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { styles } from "../../assets/css/styles";
-console.log(styles.mainCardBackground);
 const Login = () => {
-  console.log("asdasd")
   return (
     <div className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="max-w-lg mx-auto sm:max-w-md">
-        <h1 className="text-3xl font-bold text-center text-primary-500">
-          Get started today
-        </h1>
-        <p className="max-w-md mx-auto mt-4 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
-          sunt dolores deleniti inventore quaerat mollitia?
-        </p>
-        <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl text-slate-100 dark:shadow-slate-800">
-          <p className="text-lg font-medium">Sign in to your account</p>
+        <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
+          <p className="text-lg font-medium text-center my-10">Sign in</p>
           <form className="flex flex-col gap-y-3">
             <div>
               <label className="text-sm font-medium text-slate-100">
@@ -37,9 +25,9 @@ const Login = () => {
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
                       />
                     </svg>
@@ -66,15 +54,15 @@ const Login = () => {
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                       />
                     </svg>
@@ -84,9 +72,9 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="block w-full px-5 py-3 text-sm font-medium text-white bg-primary-500 rounded-global mt-3 hover:bg-primary-700"
+              className="block w-full px-5 bg-slate-300 py-3 text-sm font-medium text-slate-600 font-semibold bg-primary-500 rounded-global mt-3 hover:bg-primary-700"
             >
-              Register
+              Login
             </button>
           </form>
           <div className="flex items-center gap-x-1.5 justify-center">

@@ -1,6 +1,6 @@
 import express from "express";
 import routes from "../src/routes/index.js";
-import errorHandler from "./errors/errorHandler.js";
+
 import initialMongoConnection from "./config/DB.config.js";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
@@ -14,7 +14,6 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(routes);
-app.use(errorHandler);
 
 const API_SERVER_PORT = process.env.API_SERVER_PORT || 8002;
 initialMongoConnection();

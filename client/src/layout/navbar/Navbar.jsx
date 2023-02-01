@@ -1,10 +1,11 @@
 import React from "react";
-import { styled, alpha, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -20,10 +21,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { useDispatch, useSelector } from "react-redux";
+import authService from "../../services/auth.service";
+
+import { setIsAuth } from "../../app/redux/slices/authSlice";
 // import NavLinks from "./NavLinks";
 // import NavLinks from "./NavLinks";
 
-import { appLinks } from "../../constant/appLinks";
+import { appLinks } from "../../constants/appLinks";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -38,7 +43,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+
+  const dispatch = useDispatch();
+  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
+
+  const handleLogout = async () => {
+    const response = await authService.logout();
+    console.log(response);
+    if (response.error === false) {
+      dispatch(setIsAuth());
+    }
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -48,12 +64,10 @@ const Navbar = () => {
     setOpen(false);
   };
 
-  const theme = useTheme();
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar className="bg-slate-700">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -66,6 +80,12 @@ const Navbar = () => {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+
+          <div className="ml-auto">
+            <Button onClick={() => handleLogout()} variant="contained">
+              Log out
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <DrawerHeader />
@@ -76,6 +96,10 @@ const Navbar = () => {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            background: "#070B28",
+            color: "#fff",
+            margin: "20px",
+            borderRadius: "8px",
           },
         }}
         variant="persistent"
@@ -84,11 +108,7 @@ const Navbar = () => {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronRightIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -107,7 +127,7 @@ const Navbar = () => {
         <Divider />
         <List>
           {appLinks.map((link, index) => (
-            <Link to={link.path}>
+            <Link key={link.lable} to={link.path}>
               <ListItem key={link.lable} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>

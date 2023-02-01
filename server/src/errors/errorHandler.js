@@ -6,7 +6,7 @@ import {
 } from "./Errors.js";
 
 function generateCustomErrorResponse(res, error, statusCode) {
-  return res.status(statusCode).json({
+  return res.status(Number(statusCode)).json({
     error: true,
     message: error.message,
     stack: process.env.NODE_ENV === "development" ? error.stack : {},
@@ -22,12 +22,15 @@ export default function errorHandler(error, req, res, next) {
       return generateCustomErrorResponse(res, error, 403);
 
     case BadRequestError:
-      return generateCustomErrorResponse(res, error, 400);
+      generateCustomErrorResponse(res, error, 400);
+      break;
 
     case ServerError:
-      return generateCustomErrorResponse(res, error, 500);
+      generateCustomErrorResponse(res, error, 500);
+      break;
 
     default:
-      return res.status(500).json("Somthing went wrong!");
+      res.status(500).json("Somthing went wrong!");
+      break;
   }
 }

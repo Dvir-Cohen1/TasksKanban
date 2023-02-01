@@ -1,27 +1,38 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
+
+import { USER_ROLE } from "../constants/user.constants.js";
+import { emailRegex } from "../constants/regex.constants.js";
+
 const SALT_ROUNDS = 10;
 const userSchema = new Schema({
   username: {
     type: String,
-    require: true,
-    unique: true,
+    require: [true, "Username is required."],
+    unique: [true, "Username already exist."],
   },
   email: {
     type: String,
-    require: true,
-    unique: true,
+    require: [true, "Email is required."],
+    unique: [true, "Email already exist."],
+    match: [emailRegex],
   },
   firstName: {
     type: String,
-    required: true,
+    required: [true, "FirstName is required."],
   },
   lastName: {
     type: String,
-    required: true,
+    required: [true, "LastName is required."],
   },
   password: {
     type: String,
+    required: [true, "Password is required."],
+  },
+  role: {
+    type: String,
+    enum: Object.values(USER_ROLE),
+    default: USER_ROLE.ADMIN,
     required: false,
   },
   jwt_ac_token: {

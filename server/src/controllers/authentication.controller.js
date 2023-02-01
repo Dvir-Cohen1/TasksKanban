@@ -8,6 +8,7 @@ import * as JwtTokenService from "../services/jwt.services.js";
 import User from "../models/User.model.js";
 import { verifyAccessToken } from "../services/jwt.services.js";
 import { getCookieValue } from "../helpers/cookies.helper.js";
+import RequestValidationService from "../services/request-validation.service.js";
 
 export async function register(req, res, next) {
   try {
@@ -25,11 +26,11 @@ export async function register(req, res, next) {
 
 export async function login(req, res, next) {
   try {
-    if (!req.body) return next(new BadRequestError());
+    await RequestValidationService.loginValidation(req.body, next);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) next(new NotFoundError());
+    if (!user) return next(new NotFoundError());
 
     const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) return next(new UnauthorizeError());
@@ -38,8 +39,10 @@ export async function login(req, res, next) {
     const refreshToken = JwtTokenService.createRefreshToken(user._id);
 
     user.setJwtTokens(accessToken, refreshToken);
-    res.send({ accessToken, refreshToken });
+
+    res.send({ jwt_ac_token: accessToken });
   } catch (error) {
+    // console.log(error)
     next(new ServerError(error));
   }
 }

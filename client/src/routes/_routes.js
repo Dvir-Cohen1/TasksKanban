@@ -6,7 +6,7 @@ const Index = React.lazy(() => import("../pages/Index"));
 const Register = React.lazy(() => import("../pages/authentication/Register"));
 
 export const appRoutes = [
-  { linkLabel: "Home", path: "/", component: Index, isProtected: false },
+  { linkLabel: "Home", path: "/", component: Index, isProtected: true },
   { linkLabel: "Login", path: "/login", component: Login },
   { linkLabel: "Register", path: "/register", component: Register },
   // { linkLabel: "Chat", path: "/chat", component: Chat, isProtected: true },

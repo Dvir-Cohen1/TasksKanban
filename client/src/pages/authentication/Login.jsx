@@ -1,18 +1,59 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import {
+  loginByEmailAndPassword,
+  clearErrorMessage,
+} from "../../app/redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+const TIME_TO_CLEAR_ERROR_MSG = 3500;
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+  const navigate = useNavigate();
+  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
+
+  function onLoginSubmit(e) {
+    e.preventDefault();
+    const formValues = {
+      email: emailInputRef.current.value,
+      password: passwordInputRef.current.value,
+    };
+    dispatch(loginByEmailAndPassword(formValues));
+  }
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        dispatch(clearErrorMessage());
+      }, TIME_TO_CLEAR_ERROR_MSG);
+    }
+  }, [error, dispatch]);
+
+  useEffect(() => {
+    if (isAuth) navigate("/");
+  }, [isAuth, navigate]);
+
   return (
     <div className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="max-w-lg mx-auto sm:max-w-md">
-        <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
+        <div className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
           <p className="text-lg font-medium text-center my-10">Sign in</p>
-          <form className="flex flex-col gap-y-3">
+
+          {error && <Alert severity="error">{error}</Alert>}
+          <form onSubmit={onLoginSubmit} className="flex flex-col gap-y-3">
             <div>
               <label className="text-sm font-medium text-slate-100">
                 <p>Email</p>
               </label>
               <div className="relative mt-1">
                 <input
-                  className="w-full p-3 pr-12 text-sm shadow-sm border border-gray-200 rounded-global dark:bg-slate-900 dark:border-gray-700"
+                  required
+                  ref={emailInputRef}
+                  className="w-full p-3 pr-12 text-sm shadow-sm border text-slate-800 border-gray-200 rounded-global dark:bg-slate-900 dark:border-gray-700"
                   type="text"
                 />
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -41,7 +82,9 @@ const Login = () => {
               </label>
               <div className="relative mt-1">
                 <input
-                  className="w-full p-3 pr-12 text-sm shadow-sm border border-gray-200 rounded-global dark:bg-slate-900 dark:border-gray-700"
+                  required
+                  ref={passwordInputRef}
+                  className="w-full p-3 pr-12 text-sm shadow-sm border text-slate-800 border-gray-200 rounded-global dark:bg-slate-900 dark:border-gray-700"
                   type="text"
                 />
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -83,7 +126,7 @@ const Login = () => {
               Sign up
             </a>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

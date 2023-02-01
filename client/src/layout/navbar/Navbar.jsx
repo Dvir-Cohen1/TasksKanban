@@ -66,6 +66,7 @@ const Navbar = () => {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <div className="ml-auto">asds</div>
         </Toolbar>
       </AppBar>
       <DrawerHeader />
@@ -107,7 +108,7 @@ const Navbar = () => {
         <Divider />
         <List>
           {appLinks.map((link, index) => (
-            <Link to={link.path}>
+            <Link key={link.lable} to={link.path}>
               <ListItem key={link.lable} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>

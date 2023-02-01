@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuth) navigate("/");
+  }, [isAuth, navigate]);
+
   return (
     <div className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="max-w-lg mx-auto sm:max-w-md">
-        <form className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
-          <p className="text-lg font-medium text-center my-10">
-            Sign up
-          </p>
+        <div className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
+          <p className="text-lg font-medium text-center my-10">Sign up</p>
           <form className="flex flex-col gap-y-3">
             <div>
               <label className="text-sm font-medium text-slate-100">
@@ -86,7 +93,7 @@ const Register = () => {
               Sign up
             </a>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

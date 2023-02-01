@@ -4,11 +4,11 @@ import {
   Route,
   // Link,
   // Outlet,
-  // Navigate,
+  Navigate,
   // useLocation,
 } from "react-router-dom";
 import { appRoutes } from "./_routes";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AppLayout from "../layout/AppLayout";
 // import AuthLayout from "../layout/AuthLayout";
 // import Login from "../pages/authentication/Login";
@@ -17,7 +17,6 @@ import AppLayout from "../layout/AppLayout";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuth } = useSelector((state) => state.auth);
-
   return isAuth ? children : <Navigate to="/login" replace />;
 };
 

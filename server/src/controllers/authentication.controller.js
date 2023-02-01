@@ -44,10 +44,13 @@ export async function login(req, res, next) {
     next(new ServerError(error));
   }
 }
-export function logout(req, res, next) {
-  req.logout();
-  res.clearCookie("access_token");
-  res.send({ message: "You have been logged out." });
+export async function logout(req, res, next) {
+  const { token } = req.body;
+  const user = await User.findOne({ jwt_ac_token: token });
+  if (!user) next(new NotFoundError());
+  user.jwt_ac_token = undefined;
+  user.save();
+  res.send({ error: false, messgae: "You have been logged out" });
 }
 
 export async function createNewAccessToken(req, res, next) {

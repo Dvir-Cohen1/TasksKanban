@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const Register = () => {
@@ -89,9 +89,9 @@ const Register = () => {
           </form>
           <div className="flex items-center gap-x-1.5 justify-center">
             <p className="text-sm text-center text-gray-500">No Account? </p>
-            <a href="" className="underline text-sm">
-              Sign up
-            </a>
+            <Link to="/login" className="underline text-sm">
+              Sign in
+            </Link>
           </div>
         </div>
       </div>

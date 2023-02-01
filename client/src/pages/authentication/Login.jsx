@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import {
   loginByEmailAndPassword,
@@ -42,9 +42,6 @@ const Login = () => {
       <div className="max-w-lg mx-auto sm:max-w-md">
         <div className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
           <p className="text-lg font-medium text-center my-10">Sign in</p>
-
-          <p>test@test.com || Password123</p>
-
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={onLoginSubmit} className="flex flex-col gap-y-3">
             <div>
@@ -132,9 +129,9 @@ const Login = () => {
           </form>
           <div className="flex items-center gap-x-1.5 justify-center">
             <p className="text-sm text-center text-gray-500">No Account? </p>
-            <a href="" className="underline text-sm">
+            <Link to="/register" className="underline text-sm">
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
       </div>

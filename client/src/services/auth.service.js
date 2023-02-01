@@ -9,6 +9,28 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
+async function register(
+  email,
+  password,
+  passwordConfirmation,
+  lastName,
+  firstName
+) {
+  try {
+    const response = await api.post("/register", {
+      email,
+      password,
+      passwordConfirmation,
+      lastName,
+      firstName,
+    });
+
+    return response;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 async function login(email, password) {
   try {
     const response = await api.post("/login", { email, password });
@@ -31,5 +53,19 @@ const logout = async () => {
     return Promise.reject(error);
   }
 };
-const authService = { login, logout };
+
+const isLogin = async () => {
+  try {
+    const token = getLocalStorageValue("ac_token");
+    if (!token) return Promise.reject();
+    const response = await api.post("/isLogin", {
+      ac_token: token,
+    });
+    return response;
+  } catch (error) {
+    Promise.reject(error);
+  }
+};
+
+const authService = { login, logout, isLogin,register };
 export default authService;

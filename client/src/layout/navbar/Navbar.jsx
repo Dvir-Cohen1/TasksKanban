@@ -28,7 +28,7 @@ import { setIsAuth } from "../../app/redux/slices/authSlice";
 // import NavLinks from "./NavLinks";
 // import NavLinks from "./NavLinks";
 
-import { appLinks } from "../../constant/appLinks";
+import { appLinks } from "../../constants/appLinks";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -43,16 +43,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const dispatch = useDispatch();
-  const { isLoading, error, isAuth } = useSelector(
-    (state) => state.auth
-  );
+  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
 
   const handleLogout = async () => {
     const response = await authService.logout();
-    console.log(response)
+    console.log(response);
     if (response.error === false) {
       dispatch(setIsAuth());
     }
@@ -69,7 +67,7 @@ const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar className="bg-slate-700">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -98,6 +96,10 @@ const Navbar = () => {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            background: "#070B28",
+            color: "#fff",
+            margin: "20px",
+            borderRadius: "8px",
           },
         }}
         variant="persistent"

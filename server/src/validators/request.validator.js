@@ -12,7 +12,6 @@ const requestValidator = async (
   nextErrorHandler
 ) => {
   const isValid = await requestSchema.isValid(requestBody);
-  console.log(isValid)
   if (!isValid) return nextErrorHandler(new BadRequestError());
 };
 

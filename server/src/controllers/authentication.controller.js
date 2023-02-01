@@ -9,14 +9,14 @@ import User from "../models/User.model.js";
 import { verifyAccessToken } from "../services/jwt.services.js";
 import { getCookieValue } from "../helpers/cookies.helper.js";
 import RequestValidationService from "../services/request-validation.service.js";
+import { SELECTED_USER_FIELDS } from "../constants/user.constants.js";
 
 export async function register(req, res, next) {
   try {
-    if (!req.body) return next(new BadRequestError());
-    const user = await User.create(req.body);
-
-    user.save((error) => {
-      if (error) return next(new ServerError(error));
+    await RequestValidationService.registerValidation(req.body, next);
+    const newUser = new User(req.body);
+    newUser.save((error) => {
+      if (error) return next();
       return res.redirect(307, "/auth/login");
     });
   } catch (error) {
@@ -31,7 +31,6 @@ export async function login(req, res, next) {
 
     const user = await User.findOne({ email });
     if (!user) return next(new NotFoundError());
-
     const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) return next(new UnauthorizeError());
 
@@ -69,6 +68,19 @@ export async function createNewAccessToken(req, res, next) {
     res.cookie("accessToken", user.jwt_ac_token);
     next();
   } catch (error) {
-    return next(new ServerError(error.message));
+    return next(new ServerError(error));
+  }
+}
+
+export async function isLogin(req, res, next) {
+  try {
+    const token = req.query.ac_token || req.body.ac_token;
+    if (!token) return next(new UnauthorizeError("Token is required"));
+    const decoded = JwtTokenService.verifyAccessToken(token);
+    const { userId } = decoded;
+    const user = await User.findById(userId).select(SELECTED_USER_FIELDS);
+    res.status(200).send(user);
+  } catch (error) {
+    next(new UnauthorizeError());
   }
 }

@@ -43,6 +43,8 @@ const Login = () => {
         <div className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
           <p className="text-lg font-medium text-center my-10">Sign in</p>
 
+          <p>test@test.com || Password123</p>
+
           {error && <Alert severity="error">{error}</Alert>}
           <form onSubmit={onLoginSubmit} className="flex flex-col gap-y-3">
             <div>
@@ -51,6 +53,10 @@ const Login = () => {
               </label>
               <div className="relative mt-1">
                 <input
+                  onChange={(e) => {
+                    e.target;
+                  }}
+                  value={"test@test.com"}
                   required
                   ref={emailInputRef}
                   className="w-full p-3 pr-12 text-sm shadow-sm border text-slate-800 border-gray-200 rounded-global dark:bg-slate-900 dark:border-gray-700"
@@ -82,6 +88,10 @@ const Login = () => {
               </label>
               <div className="relative mt-1">
                 <input
+                  value={"Password123"}
+                  onChange={(e) => {
+                    e.target;
+                  }}
                   required
                   ref={passwordInputRef}
                   className="w-full p-3 pr-12 text-sm shadow-sm border text-slate-800 border-gray-200 rounded-global dark:bg-slate-900 dark:border-gray-700"

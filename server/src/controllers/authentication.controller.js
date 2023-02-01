@@ -35,14 +35,12 @@ export async function login(req, res, next) {
     const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) return next(new UnauthorizeError());
 
-    const accessToken = JwtTokenService.createAccessToken(user._id);
-    const refreshToken = JwtTokenService.createRefreshToken(user._id);
+    const jwt_ac_token = JwtTokenService.createAccessToken(user._id);
+    const jwt_rf_token = JwtTokenService.createRefreshToken(user._id);
 
-    user.setJwtTokens(accessToken, refreshToken);
-
-    res.send({ jwt_ac_token: accessToken });
+    user.setJwtTokens(jwt_ac_token, jwt_rf_token);
+    res.send({ jwt_ac_token });
   } catch (error) {
-    // console.log(error)
     next(new ServerError(error));
   }
 }

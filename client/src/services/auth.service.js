@@ -10,7 +10,6 @@ async function login(email, password) {
     const response = await api.post("/login", { email, password });
     return response;
   } catch (error) {
-    console.log(error)
     return Promise.reject(error);
   }
 }

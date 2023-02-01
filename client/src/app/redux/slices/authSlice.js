@@ -44,7 +44,7 @@ const authSlice = createSlice({
       state.error = "";
       state.isAuth = true;
       state.user = payload;
-      setLocalStorageValue("jwt_ac_token", payload.jwt_ac_token);
+      setLocalStorageValue("ac_token", payload.jwt_ac_token);
     },
     //     [isLoginByToken.pending]: (state, action) => {
     //       state.isLoading = true;

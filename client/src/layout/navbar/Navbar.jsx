@@ -67,7 +67,7 @@ const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
-        <Toolbar className="bg-slate-700">
+        <Toolbar className="bg-slate-700/0">
           <IconButton
             color="inherit"
             aria-label="open drawer"

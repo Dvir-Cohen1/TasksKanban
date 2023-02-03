@@ -3,7 +3,7 @@ import routes from "../src/routes/index.js";
 
 import initialMongoConnection from "./config/DB.config.js";
 import cors from "cors";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
 
 dotenv.config({ path: "./.env" });

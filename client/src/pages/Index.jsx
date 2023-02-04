@@ -1,7 +1,8 @@
 import React from "react";
+import Dashboard from "./dashboard/Dashboard";
 
 const Index = () => {
-  return <div>Tasks index</div>;
+  return <Dashboard />;
 };
 
 export default Index;

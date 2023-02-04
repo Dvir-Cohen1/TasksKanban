@@ -1,50 +1,43 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+import MainContent from "./Main/MainContent";
 import Navbar from "./Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
-import { setIsAuth } from "../app/redux/slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import authService from "../services/auth.service";
-const Layout = () => {
-  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
-  const [open, setOpen] = React.useState(true);
-  const dispatch = useDispatch();
+import DrawerHeader from "../components/DrawerHeader";
+import { useSelector } from "react-redux";
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const handleLogout = async () => {
-    const response = await authService.logout();
-    if (response.error === false) {
-      dispatch(setIsAuth());
-    }
-  };
+const drawerWidth = 240;
+
+const Layout = () => {
+  const [open, setOpen] = React.useState(false);
+  const { isAuth } = useSelector((state) => state.auth);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
   return (
-    <>
-      <section className="left_container">
-        <Sidebar open={open} handleDrawerClose={handleDrawerClose}></Sidebar>
-      </section>
-      <section className="right_container">
-        {isAuth && (
-          <Navbar
-            isAuth={isAuth}
-            handleLogout={handleLogout}
-            open={open}
-            handleDrawerOpen={handleDrawerOpen}
-          />
-        )}
-        <section className={"content w-full"}>
-          <Suspense fallback={<h1>Loading..</h1>}>
-            <Outlet />
-          </Suspense>
-        </section>
-      </section>
-    </>
+    <Box component={"section"} className={"content"} sx={{ display: "flex" }}>
+      <CssBaseline />
+
+      {isAuth && <Navbar open={open} handleDrawerOpen={handleDrawerOpen} />}
+
+      {isAuth && (
+        <Sidebar
+          open={open}
+          setOpen={setOpen}
+          DrawerHeader={DrawerHeader}
+          drawerWidth={drawerWidth}
+        />
+      )}
+
+      <MainContent
+        DrawerHeader={DrawerHeader}
+        Outlet={Outlet}
+        drawerWidth={drawerWidth}
+      ></MainContent>
+    </Box>
   );
 };
 

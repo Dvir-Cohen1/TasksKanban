@@ -32,8 +32,6 @@ a:hover {
 
 body {
   margin: 0;
-  /* display: flex;
-  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -53,6 +51,11 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+}
+
+header {
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 button:hover {
@@ -79,6 +82,22 @@ button:focus-visible {
   }
 }
 
+.list_item_button {
+  background-color: #1A1F37 !important;
+  padding: 8px;
+  border-radius: 8px;
+  min-width: 0 !important;
+  margin-right: 30px;
+}
+
+.list_item:hover .list_item_button {
+  background-color: rgb(44, 51, 92) !important;
+}
+
+.list_item_button svg {
+  color: #0075FF !important;
+}
+
 
 body {
   background-image: url("../images/background.png");
@@ -92,14 +111,9 @@ body {
 }
 
 
-/* main.main {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
-  min-height: 95vh;
-} */
+main {
+  color: #fff;
+}
 
 /* .MuiDrawer-docked .MuiDrawer-paper {
   width: 240px;
@@ -140,4 +154,11 @@ body {
 .content {
   width: 100%;
   padding: 25px;
+  flex-wrap: wrap;
+}
+
+.css-vx710a-MuiButtonBase-root-MuiListItemButton-root:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: rgb(0 0 0 / 21%) !important;
 }

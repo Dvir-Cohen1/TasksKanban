@@ -92,16 +92,16 @@ body {
 }
 
 
-main.main {
+/* main.main {
   display: flex;
   align-content: center;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
   min-height: 95vh;
-}
+} */
 
-.MuiDrawer-docked .MuiDrawer-paper {
+/* .MuiDrawer-docked .MuiDrawer-paper {
   width: 240px;
   box-sizing: border-box;
   background: #070b284d !important;
@@ -116,4 +116,28 @@ main.main {
   -webkit-text-decoration: none;
   text-decoration: none;
   background-color: rgb(0 0 0 / 85%);
+} */
+#root {
+  display: flex;
+  /* background: aquamarine; */
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.left_container {
+  /* background-color: #213547; */
+  width: 12%;
+}
+
+.right_container {
+  width: 88%;
+  /* background-color: #242424; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  padding: 25px;
 }

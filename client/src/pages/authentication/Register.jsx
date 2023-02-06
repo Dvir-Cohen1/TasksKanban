@@ -47,19 +47,18 @@ const Register = () => {
       <div className="max-w-lg mx-auto sm:max-w-md">
         <div className="p-8 mt-6 mb-0 space-y-4 rounded-lg  text-slate-100 dark:shadow-slate-800">
           <p className="text-lg font-medium text-center my-10">Sign up</p>
-          <form
-            onSubmit={handleSubmit(onRegisterSubmit)}
-            className="flex flex-col gap-y-3"
-          >
-            {registerItemLists.map((itemRegister, index) => {
+          <form onSubmit={handleSubmit(onRegisterSubmit)}>
+            {registerItemLists.map((registerItem, index) => {
               return (
                 <RegisterTextField
-                  label={itemRegister.label}
-                  fieldName={itemRegister.field}
-                  type={itemRegister.type}
+                  label={registerItem.label}
+                  fieldName={registerItem.field}
+                  type={registerItem.type}
                   register={register}
                   errors={errors}
                   key={index}
+                  size={"small"}
+                  color={"primary"}
                 />
               );
             })}

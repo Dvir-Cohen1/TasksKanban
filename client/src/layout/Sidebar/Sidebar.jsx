@@ -12,23 +12,23 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
+import { useLayoutContext } from "../../app/context/layoutContext";
+import { appRoutes } from "../../routes/_routes";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ open, DrawerHeader, drawerWidth, setOpen }) => {
+const Sidebar = ({ DrawerHeader }) => {
   const theme = useTheme();
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const { drawerWidth, open, handleDrawerClose } = useLayoutContext();
 
   return (
     <Drawer
       sx={{
-        width: drawerWidth,
+        width: open && drawerWidth,
         flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          background: "#070B28",
+          // background: "#070B28",
           color: "#fff",
           // margin: "20px",
           borderRadius: "8px",
@@ -51,16 +51,25 @@ const Sidebar = ({ open, DrawerHeader, drawerWidth, setOpen }) => {
       </DrawerHeader>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} className="list_item" disablePadding>
-            <ListItemButton>
-              <ListItemIcon className="list_item_button">
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {appRoutes.map(
+          (link, index) =>
+            link.isAuthRoute ?? (
+              <Link key={link.linkLabel} to={link.path}>
+                <ListItem
+                  key={link.linkLabel}
+                  className="list_item"
+                  disablePadding
+                >
+                  <ListItemButton>
+                    <ListItemIcon className="list_item_button">
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={link.linkLabel} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            )
+        )}
       </List>
       <Divider />
       <List>

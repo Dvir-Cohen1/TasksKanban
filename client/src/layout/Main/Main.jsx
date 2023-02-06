@@ -1,11 +1,7 @@
-import React from "react";
-import { styled, useTheme } from "@mui/material/styles";
-
-const drawerWidth = 240;
-
+import { styled } from "@mui/material/styles";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
+  ({ theme, open, drawerWidth }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {

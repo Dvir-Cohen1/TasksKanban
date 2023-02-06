@@ -1,20 +1,27 @@
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 
-const RegisterTextField = ({ label, fieldName, register, errors, type }) => {
+const RegisterTextField = ({
+  label,
+  fieldName,
+  register,
+  errors,
+  type,
+  size,
+  color,
+  variant,
+}) => {
   return (
-    <Grid item xs={0} sm={6}>
-      <TextField
-        label={label}
-        type={type}
-        variant="filled"
-        color="warning"
-        error={Boolean(errors[fieldName])}
-        helperText={errors[fieldName] ? errors[fieldName]?.message : " "}
-        {...register(fieldName)}
-        size="small"
-      />
-    </Grid>
+    <TextField
+      label={label}
+      type={type}
+      variant={variant}
+      color={color}
+      error={Boolean(errors[fieldName])}
+      helperText={errors[fieldName] ? errors[fieldName]?.message : " "}
+      {...register(fieldName)}
+      size={size}
+    />
   );
 };
 

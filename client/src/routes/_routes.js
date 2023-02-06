@@ -1,18 +1,15 @@
 import React from "react";
 
 const Login = React.lazy(() => import("../pages/authentication/Login"));
-const Layout = React.lazy(() => import("../layout/AppLayout"));
+const Tasks = React.lazy(() => import("../pages/tasks/Tasks"));
 const Index = React.lazy(() => import("../pages/Index"));
 const Register = React.lazy(() => import("../pages/authentication/Register"));
 
 export const appRoutes = [
-  { linkLabel: "Home", path: "/", component: Index, isProtected: true },
-  { linkLabel: "Login", path: "/login", component: Login },
-  { linkLabel: "Register", path: "/register", component: Register },
-  // { linkLabel: "Chat", path: "/chat", component: Chat, isProtected: true },
+  { linkLabel: "Dashboard", path: "/", component: Index, isProtected: true },
+  { linkLabel: "Tasks", path: "/tasks", component: Tasks, isProtected: true },
+
+  // Auth Routes
+  { linkLabel: "Login", path: "/login", component: Login, isAuthRoute: true },
+  { linkLabel: "Register", path: "/register", component: Register, isAuthRoute: true },
 ];
-// export const authRoutes = [
-//   // { linkLabel: "/", path: "/user", component: Layout },
-//   { linkLabel: "Login", path: "/login", component: Login },
-//   { linkLabel: "Register", path: "/register", component: Register },
-// ];

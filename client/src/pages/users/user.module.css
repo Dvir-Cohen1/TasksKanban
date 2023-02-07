@@ -1,0 +1,29 @@
+.card_container {
+     /* background-image: url('/cardBackground.png'); */
+     background: #0077ff22;
+     color: #fff;
+     min-width: 300px;
+     max-width: 340px;
+     backdrop-filter: blur(42px);
+     background: #070b284d;
+}
+.card_container:hover {
+     background: #070b288d;
+
+}
+
+/* .card_container {
+     background-image: url('/cardBackground.png');
+     color: #fff;
+     min-width: 300px;
+     max-width: 340px;
+} */
+
+.card_container svg {
+     color: #fff;
+}
+
+/* .card_container {
+     background: url('/client/src/assets/images/cardBackground.png');
+
+} */

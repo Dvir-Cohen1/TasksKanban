@@ -9,7 +9,7 @@ import User from "../models/User.model.js";
 import { verifyAccessToken } from "../services/jwt.services.js";
 import { getCookieValue } from "../helpers/cookies.helper.js";
 import RequestValidationService from "../services/request-validation.service.js";
-import { SELECTED_USER_FIELDS } from "../constants/user.constants.js";
+import { SELECTED_USERS_FIELDS } from "../constants/user.constants.js";
 
 export async function register(req, res, next) {
   try {
@@ -47,7 +47,7 @@ export async function logout(req, res, next) {
   const { token } = req.body;
   const user = await User.findOne({ jwt_ac_token: token });
   if (!user) next(new NotFoundError());
-  user.jwt_ac_token = undefined;
+  user.jwt_ac_token = null;
   user.save();
   res.send({ error: false, messgae: "You have been logged out" });
 }
@@ -78,7 +78,7 @@ export async function isLogin(req, res, next) {
     if (!token) return next(new UnauthorizeError("Token is required"));
     const decoded = JwtTokenService.verifyAccessToken(token);
     const { userId } = decoded;
-    const user = await User.findById(userId).select(SELECTED_USER_FIELDS);
+    const user = await User.findById(userId).select(SELECTED_USERS_FIELDS);
     res.status(200).send(user);
   } catch (error) {
     next(new UnauthorizeError());

@@ -6,7 +6,7 @@ import {
 } from "./Errors.js";
 
 function generateCustomErrorResponse(res, error, statusCode) {
-  return res.status(Number(statusCode)).json({
+  return res.json({
     error: true,
     message: error.message,
     stack: process.env.NODE_ENV === "development" ? error.stack : {},

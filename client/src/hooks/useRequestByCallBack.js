@@ -19,7 +19,7 @@ export default function useRequestByCallBack(callback) {
 
   useEffect(() => {
     fetchDataAsync();
-  }, []);
+  }, [data]);
 
   return [data, isLoading, error];
 }

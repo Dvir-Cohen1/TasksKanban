@@ -8,7 +8,7 @@ import userRoutes from "./users.routes.js";
 const router = express.Router();
 
 router.use("/auth", authRoutes);
-router.use("/users", userRoutes);
+router.use("/users", authJwtToken, userRoutes);
 router.all("*", (req, res, next) => next(new NotFoundError()));
 router.use(errorHandler);
 

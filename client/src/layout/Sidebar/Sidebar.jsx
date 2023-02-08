@@ -51,24 +51,25 @@ const Sidebar = ({ DrawerHeader }) => {
       </DrawerHeader>
       <Divider />
       <List>
-        {appRoutes.map(
-          (link, index) =>
-            link.isAuthRoute ?? (
-              <Link key={link.linkLabel} to={link.path}>
-                <ListItem
-                  key={link.linkLabel}
-                  className="list_item"
-                  disablePadding
-                >
-                  <ListItemButton>
-                    <ListItemIcon className="list_item_button">
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={link.linkLabel} />
-                  </ListItemButton>
-                </ListItem>
-              </Link>
-            )
+        {appRoutes.map((link, indexId) =>
+          link.isAuthRoute ? (
+            ""
+          ) : (
+            <Link key={indexId} to={link.path}>
+              <ListItem
+                key={link.linkLabel}
+                className="list_item"
+                disablePadding
+              >
+                <ListItemButton>
+                  <ListItemIcon className="list_item_button">
+                    {indexId % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={link.linkLabel} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )
         )}
       </List>
       <Divider />

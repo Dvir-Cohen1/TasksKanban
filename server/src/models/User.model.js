@@ -6,11 +6,6 @@ import { emailRegex } from "../constants/regex.constants.js";
 
 const SALT_ROUNDS = 10;
 const userSchema = new Schema({
-  username: {
-    type: String,
-    require: [true, "Username is required."],
-    unique: [true, "Username already exist."],
-  },
   email: {
     type: String,
     require: [true, "Email is required."],

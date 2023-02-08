@@ -37,8 +37,8 @@ const UserCard = ({ user }) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon onClick={handleClick} />
+          <IconButton onClick={handleClick} aria-label="settings">
+            <MoreVertIcon  />
           </IconButton>
         }
         title={`${user.firstName}  ${user.lastName}`}
@@ -52,7 +52,12 @@ const UserCard = ({ user }) => {
           <ShareIcon fontSize="small" />
         </IconButton>
       </CardActions>
-      <CardMenu open={open} anchorEl={anchorEl} handleClose={handleClose} />
+      <CardMenu
+        userId={user._id}
+        open={open}
+        anchorEl={anchorEl}
+        handleClose={handleClose}
+      />
     </Card>
   );
 };

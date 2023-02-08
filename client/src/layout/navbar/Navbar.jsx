@@ -17,7 +17,7 @@ const Navbar = () => {
   // Logout
   const handleLogout = async () => {
     const response = await authService.logout();
-    if (response.error === false) {
+    if (response?.error === false) {
       dispatch(setIsAuth());
     }
   };

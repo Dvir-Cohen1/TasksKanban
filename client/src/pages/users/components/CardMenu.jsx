@@ -3,10 +3,19 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
+import { deleteUser } from "../../../services/user.service";
+import SnackBar from "../../../components/common/SnackBar";
+import { useDispatch, useSelector } from "react-redux";
+import { dispatchDeleteUser } from "../../../app/redux/slices/user.slice";
 
-const cardMenuItems = ["Edit", "Delete"];
+const CardMenu = ({ userId, open, anchorEl, handleClose }) => {
+  const dispatch = useDispatch();
 
-const CardMenu = ({ open, anchorEl, handleClose }) => {
+  const handleDeleteUser = async () => {
+    dispatch(dispatchDeleteUser(userId));
+    handleClose();
+  };
+
   return (
     <Menu
       id="fade-menu"
@@ -18,9 +27,8 @@ const CardMenu = ({ open, anchorEl, handleClose }) => {
       onClose={handleClose}
       TransitionComponent={Fade}
     >
-      {cardMenuItems.map((item) => {
-        return <MenuItem onClick={handleClose}>{item}</MenuItem>;
-      })}
+      <MenuItem onClick={handleClose}>Edit</MenuItem>
+      <MenuItem onClick={() => handleDeleteUser()}>Delete</MenuItem>
     </Menu>
   );
 };

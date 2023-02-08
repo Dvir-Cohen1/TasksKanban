@@ -154,7 +154,8 @@ main {
 .content {
   width: 100%;
   padding: 25px;
-  flex-wrap: wrap;
+  display: -webkit-flex;
+  /* flex-wrap: wrap; */
 }
 
 .css-vx710a-MuiButtonBase-root-MuiListItemButton-root:hover {

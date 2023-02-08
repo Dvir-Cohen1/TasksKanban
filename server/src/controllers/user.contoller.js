@@ -1,6 +1,10 @@
 import User from "../models/User.model.js";
 import { SELECTED_USERS_FIELDS } from "../constants/user.constants.js";
-import { NotFoundError, ServerError } from "../errors/Errors.js";
+import {
+  BadRequestError,
+  NotFoundError,
+  ServerError,
+} from "../errors/Errors.js";
 
 /**
  * @param  {} req
@@ -16,5 +20,23 @@ export async function getAllUsers(req, res, next) {
     res.status(200).json(users);
   } catch (error) {
     return next(new ServerError(error));
+  }
+}
+
+export async function deleteUser(req, res, next) {
+  try {
+    const { id } = req.body;
+    if (!id) return next(new BadRequestError());
+    
+    if (req.userId === id) {
+      return next(
+        new BadRequestError("Cannot delete the user you are logged to.")
+      );
+    }
+    const user = await User.findByIdAndDelete(id);
+    if (!user) return next(new NotFoundError("No Users Found!"));
+    res.status(200).send({ error: false, message: `User: ${user} Deleted` });
+  } catch (error) {
+    return next(new ServerError());
   }
 }

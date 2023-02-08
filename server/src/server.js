@@ -1,6 +1,6 @@
 import express from "express";
 import routes from "../src/routes/index.js";
-
+import bodyParser from "body-parser";
 import initialMongoConnection from "./config/DB.config.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -9,7 +9,8 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
 const app = express();
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());

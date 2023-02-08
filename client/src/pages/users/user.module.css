@@ -7,6 +7,7 @@
      backdrop-filter: blur(42px);
      background: #070b284d;
 }
+
 .card_container:hover {
      background: #070b288d;
 
@@ -27,3 +28,8 @@
      background: url('/client/src/assets/images/cardBackground.png');
 
 } */
+
+.users_container {
+     background-color: aqua;
+     display: flex;
+}

@@ -27,15 +27,18 @@ export async function deleteUser(req, res, next) {
   try {
     const { id } = req.body;
     if (!id) return next(new BadRequestError());
-    
+    console.log(id, req.userId);
     if (req.userId === id) {
       return next(
         new BadRequestError("Cannot delete the user you are logged to.")
       );
     }
+
     const user = await User.findByIdAndDelete(id);
     if (!user) return next(new NotFoundError("No Users Found!"));
-    res.status(200).send({ error: false, message: `User: ${user} Deleted` });
+    res
+      .status(200)
+      .send({ error: false, message: `User: ${user.email} Deleted` });
   } catch (error) {
     return next(new ServerError());
   }

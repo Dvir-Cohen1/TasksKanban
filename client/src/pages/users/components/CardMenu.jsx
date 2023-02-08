@@ -3,9 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
-import { deleteUser } from "../../../services/user.service";
-import SnackBar from "../../../components/common/SnackBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { dispatchDeleteUser } from "../../../app/redux/slices/user.slice";
 
 const CardMenu = ({ userId, open, anchorEl, handleClose }) => {

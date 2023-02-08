@@ -1,10 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as userService from "../../../services/user.service";
+
 export const dispatchDeleteUser = createAsyncThunk(
   "user/dispatchDeleteUser",
-  async (values) => {
+  async (values, { getState }) => {
+    const state = getState();
+    setTimeout(() => {
+      state.message = false;
+      state.isError = false;
+    }, 6000);
     const response = await userService.deleteUser(values);
-    return response.data;
+    return response;
   }
 );
 
@@ -19,8 +25,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     clearErrorMessage: (state) => {
-      state.message = false;
-      state.isError = false;
+      return setTimeout(() => {
+        state.message = false;
+        state.isError = false;
+      }, 6000);
     },
   },
   extraReducers: {
@@ -29,15 +37,15 @@ const userSlice = createSlice({
       state.isError = false;
       state.message = "";
     },
-    [dispatchDeleteUser.rejected]: (state, action) => {
+    [dispatchDeleteUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.isError = true;
-      state.message = "missing information";
+      state.message = payload.message;
     },
     [dispatchDeleteUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.isError = false;
-      state.message = "user Deleted!";
+      state.isError = payload.error;
+      state.message = payload.message;
     },
   },
 });

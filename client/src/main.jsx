@@ -8,6 +8,7 @@ import "./assets/css/index.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./assets/theme/theme";
 import LayoutProvider from "./app/context/layoutContext";
+import SnackbarProvider from "./app/context/SnackbarContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <LayoutProvider>
-            <App />
+            <SnackbarProvider>
+              <App />
+            </SnackbarProvider>
           </LayoutProvider>
         </ThemeProvider>
       </BrowserRouter>

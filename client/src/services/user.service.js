@@ -21,6 +21,15 @@ export const getAllUsers = async (options = {}) => {
   }
 };
 
+export const getUser = async (userId) => {
+  try {
+    const response = await api.post("/user", {userId});
+    return response.data;
+  } catch (error) {
+    return Promise.resolve(error);
+  }
+};
+
 export const deleteUser = async (id) => {
   try {
     const response = await api.post("/delete", { id });

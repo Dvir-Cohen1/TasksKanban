@@ -53,7 +53,7 @@ const UserCard = ({ user }) => {
         </IconButton>
       </CardActions>
       <CardMenu
-        userId={user._id}
+        user={user}
         open={open}
         anchorEl={anchorEl}
         handleClose={handleClose}

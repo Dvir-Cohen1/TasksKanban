@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { appRoutes } from "../../routes/_routes";
+import { appRoutes } from "../../../routes/_routes";
 
 const NavLinks = () => {
   return (

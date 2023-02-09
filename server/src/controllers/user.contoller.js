@@ -23,6 +23,18 @@ export async function getAllUsers(req, res, next) {
   }
 }
 
+export async function getUser(req, res, next) {
+  try {
+    const { userId } = req.body;
+    if (!userId) return next(new BadRequestError());
+
+    const user = await User.findOne({ _id: userId }).select(SELECTED_USERS_FIELDS);
+    if (!user) return next(new NotFoundError("User not found!"));
+    res.status(200).json(user);
+  } catch (error) {
+    return next(new ServerError());
+  }
+}
 export async function deleteUser(req, res, next) {
   try {
     const { id } = req.body;

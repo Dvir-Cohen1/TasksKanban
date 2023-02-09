@@ -9,6 +9,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import { setIsAuth } from "../../app/redux/slices/authSlice";
 import { useLayoutContext } from "../../app/context/layoutContext";
+import ProfileMenu from "./components/ProfileMenu";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -54,13 +55,17 @@ const Navbar = () => {
         <Typography variant="h6" noWrap component="div">
           Persistent drawer
         </Typography>
-        <button
+
+        <div className="ml-auto">
+          <ProfileMenu handleLogout={handleLogout} />
+        </div>
+        {/* <button
           className="bg-blue-600 ml-auto"
           onClick={handleLogout}
           variant="contained"
         >
           Logout
-        </button>
+        </button> */}
       </Toolbar>
     </AppBar>
   );

@@ -29,6 +29,13 @@ export default function SnackbarProvider({ children }) {
     if (userState.message) {
       setSnackbarOpen(true);
     }
+    setTimeout(() => {
+      setSnackbarOpen(false);
+    }, 6000);
+
+    return () => {
+      setMessage("");
+    };
   }, [userState.message, message]);
 
   return (

@@ -67,5 +67,5 @@ const isLogin = async () => {
   }
 };
 
-const authService = { login, logout, isLogin, register };
+const authService = { login, logout, isLogin,register };
 export default authService;

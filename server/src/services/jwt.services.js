@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+const { TokenExpiredError, JsonWebTokenError } = jwt;
 dotenv.config();
 
 const jwtConfig = {
@@ -37,5 +38,13 @@ export const verifyAccessToken = (token) => {
   } catch (error) {
     console.log(error);
     throw error;
+    
+    // TODO: handle case when token expired
+    // if (error instanceof TokenExpiredError) {
+    //   console.log("TokenExpiredError")
+    // }
+    // if (error instanceof JsonWebTokenError) {
+    //   console.log("JsonWebTokenError")
+    // }
   }
 };

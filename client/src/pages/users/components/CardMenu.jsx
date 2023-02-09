@@ -5,12 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { useDispatch } from "react-redux";
 import { dispatchDeleteUser } from "../../../app/redux/slices/user.slice";
+import { Link } from "react-router-dom";
 
-const CardMenu = ({ userId, open, anchorEl, handleClose }) => {
+const CardMenu = ({ user, open, anchorEl, handleClose }) => {
   const dispatch = useDispatch();
 
   const handleDeleteUser = async () => {
-    dispatch(dispatchDeleteUser(userId));
+    dispatch(dispatchDeleteUser(user._id));
     handleClose();
   };
 
@@ -25,6 +26,9 @@ const CardMenu = ({ userId, open, anchorEl, handleClose }) => {
       onClose={handleClose}
       TransitionComponent={Fade}
     >
+      <Link to={{ pathname: "/profile", search: `?id=${user._id}` }}>
+        <MenuItem onClick={handleClose}>View</MenuItem>
+      </Link>
       <MenuItem onClick={handleClose}>Edit</MenuItem>
       <MenuItem onClick={() => handleDeleteUser()}>Delete</MenuItem>
     </Menu>

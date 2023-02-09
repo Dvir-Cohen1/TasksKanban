@@ -15,10 +15,12 @@ import { useTheme } from "@mui/material/styles";
 import { useLayoutContext } from "../../app/context/layoutContext";
 import { appRoutes } from "../../routes/_routes";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = ({ DrawerHeader }) => {
   const theme = useTheme();
   const { drawerWidth, open, handleDrawerClose } = useLayoutContext();
+  const { pathname } = useLocation();
 
   return (
     <Drawer
@@ -58,14 +60,17 @@ const Sidebar = ({ DrawerHeader }) => {
             <Link key={indexId} to={link.path}>
               <ListItem
                 key={link.linkLabel}
-                className="list_item"
+                className={`list_item ${
+                  pathname === link.path ? "bg-[#1A1F37]" : ""
+                }`}
                 disablePadding
               >
                 <ListItemButton>
                   <ListItemIcon className="list_item_button">
                     {indexId % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={link.linkLabel} />
+                  <span>{link.linkLabel}</span>
+                  <ListItemText />
                 </ListItemButton>
               </ListItem>
             </Link>

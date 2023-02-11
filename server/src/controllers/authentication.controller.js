@@ -11,16 +11,20 @@ import { getCookieValue } from "../helpers/cookies.helper.js";
 import RequestValidationService from "../services/request-validation.service.js";
 import { SELECTED_USERS_FIELDS } from "../constants/user.constants.js";
 
-export async function register(req, res, next) {
+export async function register(req, res, next, redirect = true) {
   try {
     await RequestValidationService.registerValidation(req.body, next);
     const newUser = new User(req.body);
+
     newUser.save((error) => {
       if (error) {
         console.log(error);
-        return next();
+        return next(new ServerError(error));
       }
 
+      if (!redirect) {
+        return res.status(200).send({ error: false, message: "User Created!" });
+      }
       return res.redirect(307, "/auth/login");
     });
   } catch (error) {
@@ -50,6 +54,7 @@ export async function login(req, res, next) {
 
 export async function logout(req, res, next) {
   const { token } = req.body;
+  // return console.log(req.userId);
   const user = await User.findOne({ jwt_ac_token: token });
   if (!user) return res.end();
   user.jwt_ac_token = undefined;
@@ -71,6 +76,7 @@ export async function createNewAccessToken(req, res, next) {
     user.save();
 
     res.cookie("accessToken", user.jwt_ac_token);
+    req.headers[("access-token", user.jwt_ac_token)];
     next();
   } catch (error) {
     return next(new ServerError(error));

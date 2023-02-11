@@ -36,15 +36,16 @@ export const verifyAccessToken = (token) => {
     const decoded = jwt.verify(token, jwtConfig.ac_secret);
     return decoded;
   } catch (error) {
-    console.log(error);
-    throw error;
+    // return;
+    // throw error;
     
     // TODO: handle case when token expired
-    // if (error instanceof TokenExpiredError) {
-    //   console.log("TokenExpiredError")
-    // }
-    // if (error instanceof JsonWebTokenError) {
-    //   console.log("JsonWebTokenError")
-    // }
+    if (error instanceof TokenExpiredError) {
+      return console.log("TokenExpiredError")
+    }
+    if (error instanceof JsonWebTokenError) {
+      return console.log("JsonWebTokenError")
+    }
+    console.log(error);
   }
 };

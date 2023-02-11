@@ -5,6 +5,7 @@ import {
   NotFoundError,
   ServerError,
 } from "../errors/Errors.js";
+import { register } from "./authentication.controller.js";
 
 /**
  * @param  {} req
@@ -28,7 +29,9 @@ export async function getUser(req, res, next) {
     const { userId } = req.body;
     if (!userId) return next(new BadRequestError());
 
-    const user = await User.findOne({ _id: userId }).select(SELECTED_USERS_FIELDS);
+    const user = await User.findOne({ _id: userId }).select(
+      SELECTED_USERS_FIELDS
+    );
     if (!user) return next(new NotFoundError("User not found!"));
     res.status(200).json(user);
   } catch (error) {
@@ -39,7 +42,7 @@ export async function deleteUser(req, res, next) {
   try {
     const { id } = req.body;
     if (!id) return next(new BadRequestError());
-    console.log(id, req.userId);
+    // return console.log(id,req.userId);
     if (req.userId === id) {
       return next(
         new BadRequestError("Cannot delete the user you are logged to.")
@@ -51,6 +54,14 @@ export async function deleteUser(req, res, next) {
     res
       .status(200)
       .send({ error: false, message: `User: ${user.email} Deleted` });
+  } catch (error) {
+    return next(new ServerError());
+  }
+}
+export async function addUser(req, res, next) {
+  try {
+    const response = await register(req, res, next, false);
+    return response;
   } catch (error) {
     return next(new ServerError());
   }

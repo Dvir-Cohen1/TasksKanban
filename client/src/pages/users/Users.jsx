@@ -6,7 +6,6 @@ import TopMenu from "./components/TopMenu";
 
 const Users = () => {
   const [users] = useRequest(getAllUsers);
-  console.log(users)
   return (
     <>
       <section>

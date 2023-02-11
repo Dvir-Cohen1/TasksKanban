@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as userService from "../../../services/user.service";
 
-
 export const dispatchDeleteUser = createAsyncThunk(
   "user/dispatchDeleteUser",
   async (values, { getState }) => {
@@ -11,6 +10,18 @@ export const dispatchDeleteUser = createAsyncThunk(
       state.isError = false;
     }, 6000);
     const response = await userService.deleteUser(values);
+    return response;
+  }
+);
+export const dispatchAddUser = createAsyncThunk(
+  "user/dispatchAddUser",
+  async (values, { getState }) => {
+    const state = getState();
+    setTimeout(() => {
+      state.message = false;
+      state.isError = false;
+    }, 6000);
+    const response = await userService.addUser(values);
     return response;
   }
 );
@@ -44,6 +55,21 @@ const userSlice = createSlice({
       state.message = payload.message;
     },
     [dispatchDeleteUser.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.isError = payload.error;
+      state.message = payload.message;
+    },
+    [dispatchAddUser.pending]: (state, action) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.message = "";
+    },
+    [dispatchAddUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.isError = payload.error;
+      state.message = payload.message;
+    },
+    [dispatchAddUser.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.isError = payload.error;
       state.message = payload.message;

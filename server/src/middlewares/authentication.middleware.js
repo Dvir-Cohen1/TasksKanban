@@ -11,7 +11,7 @@ export const authJwtToken = async (req, res, next) => {
     if (!token) return next(new UnauthorizeError());
 
     const decoded = verifyAccessToken(token);
-    req.userId = decoded.userId;
+    req.userId = decoded.userId || undefined;
     next();
   } catch (error) {
     console.log(error);

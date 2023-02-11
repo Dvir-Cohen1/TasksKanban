@@ -25,6 +25,7 @@ const initialState = {
   user: {},
 };
 
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -33,7 +34,7 @@ const authSlice = createSlice({
       state.error = "";
     },
     setIsAuth: (state) => {
-      state.isAuth = !state.isAuth;
+      state.isAuth = false;
     },
   },
   extraReducers: {
